@@ -24,7 +24,7 @@ services:
       - db_net
       - php_net
     volumes:
-      - './src:/var/www'
+      - './:/var/www/html'
 
   postgres:
     container_name: postgres_kub8
