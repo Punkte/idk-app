@@ -6,12 +6,11 @@ function Home() {
   
   return (
     <div>
-      <h2>Liste des films</h2>
+      <h2>Liste des pires films</h2>
       <div className="row">
         {films.map((film, index) => (
           <Card key={index} {...film} />
         ))}
-        {/* <Card /> */}
       </div>
     </div>
 
