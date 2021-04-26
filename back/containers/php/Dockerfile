@@ -27,3 +27,5 @@ RUN docker-php-ext-install \
     exif \
     soap \
     gd
+
+COPY . .

@@ -7,8 +7,10 @@ services:
     ports:
       - '4000:80'
     volumes:
-      - './src/:/var/www'
+      - './:/var/www/html'
       - './config-nginx/:/etc/nginx/conf.d'
+    networks:
+      - php_net
 
   php:
     container_name: php_kub8
@@ -16,20 +18,27 @@ services:
     build:
       context: './'
       dockerfile: 'containers/php/Dockerfile'
+    ports:
+      - '9000:9000'
+    networks:
+      - db_net
+      - php_net
     volumes:
       - './src:/var/www'
 
   postgres:
     container_name: postgres_kub8
     hostname: postgres_kub8
-    image: postgres
+    image: postgres:13
     ports:
       - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=dev
       - POSTGRES_USER=dev
       - POSTGRES_DB=kub8
-
+    networks:
+      - db_net
+      
   adminer:
     container_name: adminer_kub8
     hostname: adminer_kub8
@@ -37,3 +46,8 @@ services:
     restart: always
     ports:
       - 8080:8080
+    networks:
+      - db_net
+networks: 
+  db_net:
+  php_net:
