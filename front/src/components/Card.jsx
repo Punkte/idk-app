@@ -8,13 +8,15 @@ function Card({
   note,
   img,
   synopsis,
+  onSelect
 }) {
-  return 
-  <div className="card col-4">
-    <p className="card__title">{titre}</p>
-    <p> Note: {note}</p>
-    <img src={img} alt={titre} />
-  </div>
+  return (
+    <div className="card col-4" onClick={onSelect}>
+      <p className="card__title">{titre}</p>
+      <p> Note: {note}</p>
+      <img src={img} alt={titre} />
+    </div>
+)
 }
 
 export default Card

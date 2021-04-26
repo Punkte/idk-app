@@ -6,18 +6,23 @@ import {
   Link
 } from "react-router-dom";
 import './App.css'
+import Create from './Pages/Create';
+import Film from './Pages/Film';
 import Home from './Pages/Home'
+import routes from './routes'
 
 function App() {
-
+  console.log(routes)
   return (
     <Router>
     <div>
       <nav>
         <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
+          {routes.map(({ title, to, meta }, index) => {
+            return meta.inMenu ? <li key={index}>
+              <Link to={to}>{title}</Link>
+            </li> : null}
+          )}
         </ul>
       </nav>
 
@@ -27,8 +32,11 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route> 
-        <Route path="/bonsoir">
-          <div>bonsoir</div>
+        <Route path="/film/:id">
+          <Film />
+        </Route> 
+        <Route path="/create">
+          <Create />
         </Route> 
       </Switch>
     </div>

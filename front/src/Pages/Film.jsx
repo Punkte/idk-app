@@ -1,13 +1,18 @@
 import React from 'react'
+import { useParams } from 'react-router'
+import films from '../films.json'
 
-const Film = ({
-  titre,
-  realisateur,
-  date_sortie,
-  note,
-  img,
-  synopsis,
-}) => {
+const Film = () => {
+  const {id} = useParams()
+  console.log('lol')
+  const {
+    titre,
+    realisateur,
+    date_sortie,
+    note,
+    img,
+    synopsis
+  } = films[+id]
   return (
     <div>
       <h1>{titre}</h1>
