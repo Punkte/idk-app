@@ -1,0 +1,66 @@
+[
+    {
+        "titre" : "Dragonball Evolution",
+        "realisateur" : "James Wong",
+        "date_sortie" : "01/04/2009",
+        "note" : 1,
+        "img" : "https://fr.web.img6.acsta.net/c_310_420/medias/nmedia/18/65/35/69/19065645.jpg",
+        "synopsis" : "Goku, un guerrier doté de super-pouvoirs, protège la Terre de Piccolo et ses sbires, bien décidés à dominer l'univers grâce aux boules de cristal..."
+    },
+    {
+        "titre" : "Pédale dure",
+        "realisateur" : "Gabriel Aghion",
+        "date_sortie" : "30/08/2003",
+        "note" : 2.2,
+        "img" : "https://fr.web.img5.acsta.net/c_310_420/medias/nmedia/18/35/40/42/18390656.jpg",
+        "synopsis" : "Marie Hagutte vit avec un couple d'homosexuels. Enceinte de l'un d'eux, elle rencontre l'homme de sa vie..."
+    },
+    {
+        "titre" : "People Jet Set 2",
+        "realisateur" : "Fabien Onteniente",
+        "date_sortie" : "19/05/2004",
+        "note" : 2.6,
+        "img" : "https://fr.web.img2.acsta.net/c_310_420/medias/nmedia/18/35/24/04/18377258.jpg",
+        "synopsis" : "Charles de Poulignac règne en maître sur la jet set parisienne, mais un accident malheureux fait de lui la risée du Tout-Paris. Déchu de ses privilèges, il se rend à Ibiza et rencontre l'homme de la situation, John John, roi des branchés..."
+    },
+    {
+        "titre" : "Bad Buzz",
+        "realisateur" : "Stéphane Kazandjian",
+        "date_sortie" : "21/06/2016",
+        "note" : 1.6,
+        "img" : "https://fr.web.img6.acsta.net/c_310_420/pictures/17/05/11/10/50/076789.jpg",
+        "synopsis" : "Au sommet de leur carrière, Eric & Quentin font un terrible bad buzz qui menace d'anéantir leur réputation.Pour sauver leur peau, ils n'ont plus qu'une solution : réaliser un bon buzz en moins de 48 heures !"
+    },
+    {
+        "titre" : "L'Américain",
+        "realisateur" : "Patrick Timsit",
+        "date_sortie" : "07/07/2004",
+        "note" : 2.1,
+        "img" : "https://fr.web.img6.acsta.net/c_310_420/medias/nmedia/18/35/23/74/18380833.jpg",
+        "synopsis" : "Bien que français, Francis se considère avant tout comme américain, ce que se refuse à admettre l'ambassade américaine à Paris. Il va tenter de convaincre les Américains en transformant son lotissement de Sarcelles en 51ème Etat des Etats-Unis."
+    },
+    {
+        "titre" : "Le Fils du Mask",
+        "realisateur" : "Patrick Timsit",
+        "date_sortie" : "23/03/2005",
+        "note" : 2.1,
+        "img" : "https://fr.web.img5.acsta.net/c_310_420/pictures/14/03/19/12/10/555347.jpg",
+        "synopsis" : "Tim Avery, un dessinateur qui n'est pas prêt à être père, se retrouve contraint d'élever un bébé. Les pouvoirs que lui confère le masque de Loki lui permettront de mener à bien cette mission."
+    },
+    {
+        "titre" : "JESSICA FOREVER",
+        "realisateur" : "Caroline Poggi, Jonathan Vinel",
+        "date_sortie" : "01/05/2019",
+        "note" : 1.4,
+        "img" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxQeBw5C81e0ZlNrnfBWmY3SFP90YlnciyKDL7Ctz1Sr0hKfls",
+        "synopsis" : "Jessica est une reine mais elle pourrait aussi bien être un chevalier, une mère, une magicienne, une déesse ou une star. Jessica, c’est surtout celle qui a sauvé tous ces enfants perdus, ces garçons solitaires, orphelins et persécutés qui n’ont jamais connu l’amour et qui sont devenus des monstres. Ensemble, ils forment une famille et cherchent à créer un monde dans lequel ils auront le droit de rester vivants."
+    },
+    {
+        "titre" : "LA BEUZE",
+        "realisateur" : "François Desagnat, Thomas Sorriaux",
+        "date_sortie" : "5 février 2003 ",
+        "note" : 1.5,
+        "img" : "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTr28xPhaG-FTfVtsajWkR-Yi1agSjrCL6cNt4ip0ufFKRFQrjr",
+        "synopsis" : "Alphonse Brown, fils caché de James Brown, et Scotch sont amis depuis l'enfance. Ils vivent au Havre de petits deals minables jusqu'au jour où Alphonse se fait serrer.Après un an de prison, il retrouve Scotch et la liberté avec la ferme intention de tirer un trait sur les galères du passé pour suivre les traces de son père dans la musique.Le soir de la libération d'Alphonse, sa vie et celle de Scotch vont basculer quand ils découvrent dans un bunker, une vieille malle au contenu mystérieux. Alors qu'ils débarquent à Paris dans l'espoir d'entamer une grande carrière dans la musique, ils vont vite se rendre compte que leur trésor est l'objet de toutes les convoitises..."
+    }
+]

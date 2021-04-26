@@ -1,0 +1,39 @@
+version: '3.7'
+services:
+  nginx:
+    container_name: nginx_kub8
+    hostname: nginx_kub8
+    image: nginx
+    ports:
+      - '4000:80'
+    volumes:
+      - './src/:/var/www'
+      - './config-nginx/:/etc/nginx/conf.d'
+
+  php:
+    container_name: php_kub8
+    hostname: php_kub8
+    build:
+      context: './'
+      dockerfile: 'containers/php/Dockerfile'
+    volumes:
+      - './src:/var/www'
+
+  postgres:
+    container_name: postgres_kub8
+    hostname: postgres_kub8
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=dev
+      - POSTGRES_USER=dev
+      - POSTGRES_DB=kub8
+
+  adminer:
+    container_name: adminer_kub8
+    hostname: adminer_kub8
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
