@@ -6,7 +6,16 @@ import { useEffect, useState } from "react"
  * @param {array} deps 
  * @returns 
  */
-const useFetch = (url, deps = []) => {
+const useFetch = (
+  url,
+  deps = [],
+  options = { 
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }) => {
   const [data, setData] = useState(null)
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -15,7 +24,7 @@ const useFetch = (url, deps = []) => {
     (async () => {
       setError(false)
       try {
-        const req = await fetch(url)
+        const req = await fetch(url, options)
         const res = await req.json()
         setLoading(false)
         setData(res)

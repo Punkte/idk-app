@@ -38,6 +38,8 @@ services:
       - POSTGRES_DB=kub8
     networks:
       - db_net
+    volumes:
+      - ./db:/var/lib/postgresql/data
       
   adminer:
     container_name: adminer_kub8
