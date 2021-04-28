@@ -35,7 +35,6 @@ function Home() {
                 note={film?.note}
                 img={film?.image}
                 synopsis={film.synopsis}
-
               />
             ))}
           </>

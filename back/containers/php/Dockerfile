@@ -34,4 +34,5 @@ COPY . .
 
 RUN composer install
 
+COPY . /var/www/html/
 # RUN php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration

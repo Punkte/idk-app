@@ -1,0 +1,52 @@
+version: '3.7'
+services:
+  nginx:
+    container_name: nginx-kub8
+    hostname: nginx-kub8
+    build:
+      context: './'
+      dockerfile: 'containers/php/nginx'
+    ports:
+      - '4000:80'
+    networks:
+      - php-net
+
+  php:
+    container_name: php-kub8
+    hostname: php-kub8
+    build:
+      context: './'
+      dockerfile: 'containers/php/Dockerfile'
+    ports:
+      - '9000:9000'
+    networks:
+      - db-net
+      - php-net
+
+  postgres:
+    container_name: postgres-kub8
+    hostname: postgres-kub8
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=dev
+      - POSTGRES_USER=dev
+      - POSTGRES_DB=kub8
+    networks:
+      - db-net
+    volumes:
+      - ./db:/var/lib/postgresql/data
+      
+  adminer:
+    container_name: adminer-kub8
+    hostname: adminer-kub8
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - db-net
+networks: 
+  db-net:
+  php-net:

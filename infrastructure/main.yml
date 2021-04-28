@@ -1,0 +1,188 @@
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: static-web
+#   labels:
+#     role: myrole
+# spec:
+#   containers:
+#     - name: web
+#       image: elmel/idk-app
+#       ports:
+#         - name: web
+#           containerPort: 80
+#           protocol: TCP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-deployment
+            port:
+              number: 8081
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-api-deployment
+            port:
+              number: 4000
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: elmel/idk-app
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service # nom du service
+spec:
+  selector:
+    apps: nginx # match les labels des pods définis dans Deployment
+  type: LoadBalancer # Nom qui porte à confusion, assigne le service à une adresse IP Externe, donc l'expose (External Service)
+  ports:
+    - protocol: TCP
+      port: 8081 # port du Service
+      targetPort: 80 # port du container dans Deployment
+      nodePort: 30000 # Port des IP externes (range entre 30000-32767)
+
+---
+
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: database
+#   labels:
+#     role: myrole
+# spec:
+#   containers:
+#     - name: postgres
+#       image: postgres:13.2
+#       ports:
+#         - name: postgres
+#           containerPort: 8082
+#           protocol: TCP
+#       env: # variables d'environnement nécessaires à l'app déployée
+#          - name: POSTGRES_DB
+#            valueFrom:
+#              configMapKeyRef: # fait référence à un "ConfigMap", va piocher les variables dedans (le ConfigMap.yaml doit être déployé avant ce fichier du coup)
+#                name: postgres-configmap # nom du confiMap déployé
+#                key: database_name # valeur que l'on veut attribuer à ME_CONFIG_MONGODB_SERVER
+#          - name: POSTGRES_USER
+#            valueFrom:
+#              secretKeyRef: # fait référence à un "Secret", c'est l'équivalent d'un ConfigMap pour des variables sensibles
+#                name: postgres-secret # nom du Secret déployé
+#                key:  postgres-username # valeur que l'on veut attribuer à ME_CONFIG_MONGODB_ADMINUSERNAME
+#          - name: POSTGRES_PASSWORD
+#            valueFrom:
+#              secretKeyRef:
+#                name: postgres-secret
+#                key:  postgres-password
+
+---
+
+apiVersion: apps/v1
+kind: Deployment 
+metadata: # info concernant le deployment
+  name: postgres-deployment
+  labels:
+    app: postgres # labels permettent aux selector de s'y rattacher (voir plus bas)
+spec: # spec du deployment
+  replicas: 1 # nombre de replicas de pods qui doit être maintenu
+  selector:
+    matchLabels:
+      app: postgres
+  template: # plan pour les pods
+    metadata:
+      labels:
+        app: postgres
+    spec: # spec des pods
+      containers:
+      - name: postgres
+        image: postgres
+        ports:
+        - containerPort: 8082
+        env: # variables d'environnement nécessaires à l'app déployée
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef: # fait référence à un "ConfigMap", va piocher les variables dedans (le ConfigMap.yaml doit être déployé avant ce fichier du coup)
+              name: postgres-configmap # nom du confiMap déployé
+              key: database_name # valeur que l'on veut attribuer à ME_CONFIG_MONGODB_SERVER
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef: # fait référence à un "Secret", c'est l'équivalent d'un ConfigMap pour des variables sensibles
+              name: postgres-secret # nom du Secret déployé
+              key:  postgres-username # valeur que l'on veut attribuer à ME_CONFIG_MONGODB_ADMINUSERNAME
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key:  postgres-password
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service # nom du service
+spec:
+  selector:
+    apps: postgres # match les labels des pods définis dans Deployment
+  type: LoadBalancer # Nom qui porte à confusion, assigne le service à une adresse IP Externe, donc l'expose (External Service)
+  ports:
+    - protocol: TCP
+      port: 8082 # port du Service
+      targetPort: 8082 # port du container dans Deployment
+      nodePort: 30001 # Port des IP externes (range entre 30000-32767)
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+type: Opaque
+data:
+  postgres-username: "ZGV2" # Dans les Secrets, les infos doivent Ãªtre en base64 --> $> echo -n 'username' | bas64
+  postgres-password: "ZGV2" # $> echo -n 'password' | base64
+
+---
+apiVersion: v1
+kind: ConfigMap 
+metadata:
+  name: postgres-configmap
+data:
+  database_name: kub8
